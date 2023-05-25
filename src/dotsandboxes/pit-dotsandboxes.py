@@ -1,7 +1,7 @@
 import os
 import numpy as np
-import Arena
-from MCTS import MCTS
+import arena
+from mcts import MCTS
 from utils import dotdict
 from dotsandboxes.DotsAndBoxesGame import DotsAndBoxesGame
 from dotsandboxes.DotsAndBoxesPlayers import HumanDotsAndBoxesPlayer, RandomPlayer, \
@@ -39,7 +39,7 @@ def main():
     # Play AlphaZero versus Human
     p1 = n1p
     p2 = hp1
-    arena = Arena.Arena(p1, p2, g, display=DotsAndBoxesGame.display)
+    arena = arena.Arena(p1, p2, g, display=DotsAndBoxesGame.display)
     oneWon, twoWon, draws = arena.playGames(2, verbose=True)
     print("oneWon: {}, twoWon: {}, draws: {}".format(oneWon, twoWon, draws))
 

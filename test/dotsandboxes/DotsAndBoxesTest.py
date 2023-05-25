@@ -5,12 +5,12 @@ from dotsandboxes.DotsAndBoxesGame import DotsAndBoxesGame
 
 class TestDotsAndBoxes:
     def testGetBoardSize(self):
-        assert (5, 3) == DotsAndBoxesGame(n=2).getBoardSize()
-        assert (7, 4) == DotsAndBoxesGame(n=3).getBoardSize()
+        assert (5, 3) == DotsAndBoxesGame(n=2).get_board_size()
+        assert (7, 4) == DotsAndBoxesGame(n=3).get_board_size()
 
     def testGetActionSize(self):
-        assert 13 == DotsAndBoxesGame(n=2).getActionSize()
-        assert 25 == DotsAndBoxesGame(n=3).getActionSize()
+        assert 13 == DotsAndBoxesGame(n=2).get_action_size()
+        assert 25 == DotsAndBoxesGame(n=3).get_action_size()
 
     def testGetNextState(self):
         g = DotsAndBoxesGame(n=2)
@@ -24,7 +24,7 @@ class TestDotsAndBoxes:
         ])
         action = 0
         player = 1
-        next_state = g.getNextState(board, player, action)
+        next_state = g.get_next_state(board, player, action)
         assert np.array_equal(next_state[0], np.array([
             [1, 0, 0],
             [0, 0, 0],
@@ -36,7 +36,7 @@ class TestDotsAndBoxes:
 
         action = 1
         player = -1
-        next_state = g.getNextState(board, player, action)
+        next_state = g.get_next_state(board, player, action)
         assert np.array_equal(next_state[0], np.array([
             [1, 1, 0],
             [0, 0, 0],
@@ -48,7 +48,7 @@ class TestDotsAndBoxes:
 
         action = 11
         player = 1
-        next_state = g.getNextState(board, player, action)
+        next_state = g.get_next_state(board, player, action)
         assert np.array_equal(next_state[0], np.array([
             [1, 1, 0],
             [0, 0, 0],
@@ -69,7 +69,7 @@ class TestDotsAndBoxes:
         ])
         action = 7
         player = -1
-        next_state = g.getNextState(board, player, action)
+        next_state = g.get_next_state(board, player, action)
         assert np.array_equal(next_state[0], np.array([
             [1, 0, 0],
             [1, 0, 1],
@@ -90,7 +90,7 @@ class TestDotsAndBoxes:
         ])
         action = 7
         player = 1
-        next_state = g.getNextState(board, player, action)
+        next_state = g.get_next_state(board, player, action)
         assert np.array_equal(next_state[0], np.array([
             [1, 0, 1],
             [1, 0, 0],
@@ -108,7 +108,7 @@ class TestDotsAndBoxes:
         ])
         action = 8
         player = 1
-        next_state = g.getNextState(board, player, action)
+        next_state = g.get_next_state(board, player, action)
         assert np.array_equal(next_state[0], np.array([
             [0, 1, 1],
             [0, 1, 0],
@@ -131,7 +131,7 @@ class TestDotsAndBoxes:
         ])
         action = 13
         player = 1
-        next_state = g.getNextState(board, player, action)
+        next_state = g.get_next_state(board, player, action)
         assert np.array_equal(next_state[0], np.array([
             [1, 0, 0, 1],
             [1, 0, 0, 0],
@@ -153,7 +153,7 @@ class TestDotsAndBoxes:
         ])
         action = 15
         player = 1
-        next_state = g.getNextState(board, player, action)
+        next_state = g.get_next_state(board, player, action)
         assert np.array_equal(next_state[0], np.array([
             [1, 0, 1, 1],
             [1, 0, 1, 0],
@@ -175,7 +175,7 @@ class TestDotsAndBoxes:
             [0, 0, 0],
             [0, 0, 0]
         ])
-        valid = g.getValidMoves(board, 1)
+        valid = g.get_valid_moves(board, 1)
         assert np.array_equal(valid, np.array(
             [True, True, True, True, True, True, True, True, True, True, True, True, False]))
 
@@ -187,7 +187,7 @@ class TestDotsAndBoxes:
             [0, 0, 0],
             [0, 0, 0]
         ])
-        valid = g.getValidMoves(board, 1)
+        valid = g.get_valid_moves(board, 1)
         assert np.array_equal(valid, np.array(
             [False, False, False, False, False, False, False, False, False, False, False, False,
              True]))
@@ -199,7 +199,7 @@ class TestDotsAndBoxes:
             [0, 0, 0],
             [0, 0, 0]
         ])
-        valid = g.getValidMoves(board, 1)
+        valid = g.get_valid_moves(board, 1)
         assert np.array_equal(valid, np.array(
             [False, True, True, True, True, True, True, True, True, True, True, True, False]))
 
@@ -210,7 +210,7 @@ class TestDotsAndBoxes:
             [0, 0, 0],
             [0, 0, 1]
         ])
-        valid = g.getValidMoves(board, 1)
+        valid = g.get_valid_moves(board, 1)
         assert np.array_equal(valid, np.array(
             [False, True, True, True, True, True, True, True, True, True, True, False, False]))
 
@@ -221,7 +221,7 @@ class TestDotsAndBoxes:
             [0, 0, 0],
             [0, 0, 1]
         ])
-        valid = g.getValidMoves(board, 1)
+        valid = g.get_valid_moves(board, 1)
         assert np.array_equal(valid, np.array(
             [False, False, True, True, True, True, True, True, True, True, True, False, False]))
 
@@ -232,7 +232,7 @@ class TestDotsAndBoxes:
             [1, 0, 0],
             [0, 0, 1]
         ])
-        valid = g.getValidMoves(board, 1)
+        valid = g.get_valid_moves(board, 1)
         assert np.array_equal(valid, np.array(
             [False, False, True, True, True, True, False, True, True, True, True, False, False]))
 
@@ -246,7 +246,7 @@ class TestDotsAndBoxes:
             [0, 0, 0],
             [0, 0, 0]
         ])
-        outcome = g.getGameEnded(board, 1)
+        outcome = g.get_game_ended(board, 1)
         assert 0 == outcome
 
         board = np.array([
@@ -256,9 +256,9 @@ class TestDotsAndBoxes:
             [1, 1, 1],
             [1, 1, 1]
         ])
-        outcome = g.getGameEnded(board, 1)
+        outcome = g.get_game_ended(board, 1)
         assert 1 == outcome
-        outcome = g.getGameEnded(board, -1)
+        outcome = g.get_game_ended(board, -1)
         assert -1 == outcome
 
         board = np.array([
@@ -268,9 +268,9 @@ class TestDotsAndBoxes:
             [1, 1, 1],
             [1, 1, 1]
         ])
-        outcome = g.getGameEnded(board, 1)
+        outcome = g.get_game_ended(board, 1)
         assert -1 == outcome
-        outcome = g.getGameEnded(board, -1)
+        outcome = g.get_game_ended(board, -1)
         assert 1 == outcome
 
         board = np.array([
@@ -280,9 +280,9 @@ class TestDotsAndBoxes:
             [1, 1, 1],
             [1, 1, 1]
         ])
-        outcome = g.getGameEnded(board, 1)
+        outcome = g.get_game_ended(board, 1)
         assert -1 == outcome
-        outcome = g.getGameEnded(board, -1)
+        outcome = g.get_game_ended(board, -1)
         assert 1 == outcome
 
     def testSymmetriesN2(self):
@@ -295,7 +295,7 @@ class TestDotsAndBoxes:
             [9, 10, 11]
         ])
         pi = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
-        sym = g.getSymmetries(board, pi)
+        sym = g.get_symmetries(board, pi)
 
         assert np.array_equal(sym[0][0], np.array([
             [11, 8, 0],
@@ -379,7 +379,7 @@ class TestDotsAndBoxes:
             [9, 10, 11]
         ])
         pi = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
-        sym = g.getSymmetries(board, pi)
+        sym = g.get_symmetries(board, pi)
 
         assert np.array_equal(sym[0][0], np.array([
             [11, 8, 1],
@@ -467,7 +467,7 @@ class TestDotsAndBoxes:
         pi = np.array(
             [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
              24])
-        sym = g.getSymmetries(board, pi)
+        sym = g.get_symmetries(board, pi)
 
         assert np.array_equal(sym[0][0], np.array([
             [23, 19, 15, 0],

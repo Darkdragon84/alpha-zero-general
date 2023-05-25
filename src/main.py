@@ -2,7 +2,7 @@ import logging
 
 import coloredlogs
 
-from Coach import Coach
+from coach import Coach
 from othello.OthelloGame import OthelloGame as Game
 from othello.pytorch.NNet import NNetWrapper as nn
 from utils import dotdict
@@ -47,7 +47,7 @@ def main():
 
     if args.load_model:
         log.info("Loading 'trainExamples' from file...")
-        c.loadTrainExamples()
+        c.load_train_examples()
 
     log.info('Starting the learning process 🎉')
     c.learn()

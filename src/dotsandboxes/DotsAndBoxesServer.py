@@ -3,7 +3,7 @@ import numpy as np
 from flask import Flask, request, Response
 
 
-from MCTS import MCTS
+from mcts import MCTS
 
 from dotsandboxes.DotsAndBoxesGame import DotsAndBoxesGame
 from dotsandboxes.keras.NNet import NNetWrapper
@@ -19,7 +19,7 @@ g = None
 # curl -d "board=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" -X POST http://localhost:8888/predict
 @app.route('/predict', methods=['POST'])
 def predict():
-    board = np.fromstring(request.form['board'], sep=',').reshape(g.getBoardSize())
+    board = np.fromstring(request.form['board'], sep=',').reshape(g.get_board_size())
 
     use_alpha_zero = True
     if use_alpha_zero:

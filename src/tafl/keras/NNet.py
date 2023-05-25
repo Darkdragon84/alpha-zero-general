@@ -4,7 +4,7 @@ import time
 import numpy as np
 
 from utils import dotdict
-from NeuralNet import NeuralNet
+from neural_net import NeuralNet
 
 from tafl.keras.TaflNNet import TaflNNet
 
@@ -22,8 +22,8 @@ class NNetWrapper(NeuralNet):
     def __init__(self, game):
         super().__init__(game)
         self.nnet = TaflNNet(game, args)
-        self.board_x, self.board_y = game.getBoardSize()
-        self.action_size = game.getActionSize()
+        self.board_x, self.board_y = game.get_board_size()
+        self.action_size = game.get_action_size()
 
     def train(self, examples):
         """

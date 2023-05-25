@@ -1,0 +1,25 @@
+[build-system]
+requires = ['setuptools']
+build-backend = 'setuptools.build_meta'
+
+[project]
+version = '0.0.1'
+name = 'alpha-zero-general'
+description = 'AlphaZero Implementation for a big collection of games'
+readme = 'README.md'
+requires-python = '>=3.10'
+classifiers = [
+    'Programming Language :: Python :: 3',
+]
+dependencies = [
+    "numpy",
+    "pygame",
+    "pytest",
+    "tensorboard~=2.9.1",
+    "tensorflow~=2.9.1",
+    "tensorflow-estimator~=2.9.0",
+    "termcolor",
+    "tqdm",
+    "typing_extensions",
+    "urllib3",
+]

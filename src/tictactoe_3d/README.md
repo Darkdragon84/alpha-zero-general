@@ -5,7 +5,7 @@ An implementation of a simple game provided to check extendability of the framew
 To train a model for TicTacToe, change the imports in ```main.py``` to:
 
 ```python
-from Coach import Coach
+from coach import Coach
 from tictactoe_3d.TicTacToeGame import TicTacToeGame as Game
 from tictactoe_3d.keras import NNetWrapper as nn
 from utils import *

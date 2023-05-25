@@ -6,10 +6,10 @@ class RandomPlayer:
         self.game = game
 
     def play(self, board):
-        a = np.random.randint(self.game.getActionSize())
-        valids = self.game.getValidMoves(board, 1)
+        a = np.random.randint(self.game.get_action_size())
+        valids = self.game.get_valid_moves(board, 1)
         while valids[a] != 1:
-            a = np.random.randint(self.game.getActionSize())
+            a = np.random.randint(self.game.get_action_size())
         return a
 
 
@@ -38,13 +38,13 @@ class GreedySantoriniPlayer:
         self.game = game
 
     def play(self, board):
-        valids = self.game.getValidMoves(board, 1)
+        valids = self.game.get_valid_moves(board, 1)
         candidates = []
-        for a in range(self.game.getActionSize()):
+        for a in range(self.game.get_action_size()):
             if valids[a] == 0:
                 continue
-            nextBoard, _ = self.game.getNextState(board, 1, a)
-            score = self.game.getScore(nextBoard, 1)
+            nextBoard, _ = self.game.get_next_state(board, 1, a)
+            score = self.game.get_score(nextBoard, 1)
             candidates += [(-score, a)]
         candidates.sort()
 

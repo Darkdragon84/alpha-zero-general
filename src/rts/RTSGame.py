@@ -8,19 +8,21 @@ from typing import Tuple
 
 import numpy as np
 
+from game import Game
 from rts.src.Board import Board
 from rts.src.config import NUM_ENCODERS, NUM_ACTS, P_NAME_IDX, A_TYPE_IDX, TIME_IDX, FPS
 from rts.src.config_class import CONFIG
 
 
-class RTSGame:
+class RTSGame(Game):
 
     def __init__(self) -> None:
+        super().__init__()
         self.n = CONFIG.grid_size
 
         self.initial_board_config = CONFIG.initial_board_config
 
-    def setInitBoard(self, board_config) -> None:
+    def set_init_board(self, board_config) -> None:
         """
         Sets initial_board_config. This function can be used dynamically to change board
         configuration. It is currently being used by rts_ue4.py, to set board configuration from
@@ -29,7 +31,7 @@ class RTSGame:
         """
         self.initial_board_config = board_config
 
-    def getInitBoard(self) -> np.ndarray:
+    def get_init_board(self) -> np.ndarray:
         """
         :return: Returns new board from initial_board_config. That config can be dynamically
         changed as game progresses.
@@ -43,14 +45,14 @@ class RTSGame:
         b.pieces[:, :, TIME_IDX] = remaining_time
         return np.array(b.pieces)
 
-    def getBoardSize(self) -> Tuple[int, int, int]:
+    def get_board_size(self) -> Tuple[int, int, int]:
         # (a,b) tuple
         return self.n, self.n, NUM_ENCODERS
 
-    def getActionSize(self) -> int:
+    def get_action_size(self) -> int:
         return self.n * self.n * NUM_ACTS + 1
 
-    def getNextState(self, board: np.ndarray, player: int, action: int) -> Tuple[np.ndarray, int]:
+    def get_next_state(self, board: np.ndarray, player: int, action: int) -> Tuple[np.ndarray, int]:
         """
         Gets next state for board. It also updates tick for board as game tick iterations are
         transfered within board as 6. parameter
@@ -83,7 +85,7 @@ class RTSGame:
 
         return b.pieces, -player
 
-    def getValidMoves(self, board: np.ndarray, player: int):
+    def get_valid_moves(self, board: np.ndarray, player: int):
 
         valids = []
         b = Board(self.n)
@@ -106,7 +108,7 @@ class RTSGame:
         return np.array(valids)
 
     # noinspection PyUnusedLocal
-    def getGameEnded(self, board: np.ndarray, player) -> float:
+    def get_game_ended(self, board: np.ndarray, player) -> float:
         """
         Ok, this function is where it gets complicated...
         See, its  hard to decide when to finish rts game, as players might not have enough time
@@ -136,8 +138,8 @@ class RTSGame:
         if USE_TIMEOUT:
             if board[0, 0, TIME_IDX] < 1:
 
-                score_player1 = self.getScore(board, player)
-                score_player2 = self.getScore(board, -player)
+                score_player1 = self.get_score(board, player)
+                score_player2 = self.get_score(board, -player)
 
                 if score_player1 == score_player2:
                     return 0.001
@@ -169,20 +171,20 @@ class RTSGame:
 
         # detect no valid actions - possible tie by overpopulating on non-attacking units and
         # buildings - all fields are full or one player is surrounded:
-        if sum(self.getValidMoves(board, 1)) == 0:
+        if sum(self.get_valid_moves(board, 1)) == 0:
             return -1
 
-        if sum(self.getValidMoves(board, -1)) == 0:
+        if sum(self.get_valid_moves(board, -1)) == 0:
             return 1
         # continue game
         return 0
 
-    def getCanonicalForm(self, board: np.ndarray, player: int):
+    def get_canonical_form(self, board: np.ndarray, player: int):
         b = np.copy(board)
         b[:, :, P_NAME_IDX] = b[:, :, P_NAME_IDX] * player
         return b
 
-    def getSymmetries(self, board: np.ndarray, pi):
+    def get_symmetries(self, board: np.ndarray, pi):
         # mirror, rotational
         assert (len(pi) == self.n * self.n * NUM_ACTS + 1)  # 1 for pass
         pi_board = np.reshape(pi[:-1], (self.n, self.n, NUM_ACTS))
@@ -197,10 +199,10 @@ class RTSGame:
                 return_list += [(newB, list(newPi.ravel()) + [pi[-1]])]
         return return_list
 
-    def stringRepresentation(self, board: np.ndarray):
+    def string_representation(self, board: np.ndarray):
         return board.tostring()
 
-    def getScore(self, board: np.array, player: int):
+    def get_score(self, board: np.array, player: int):
         """
         Uses one of 3 elo functions that determine better player
         :param board: game state

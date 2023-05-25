@@ -10,7 +10,7 @@ import os
 
 import numpy as np
 
-from NeuralNet import NeuralNet
+from neural_net import NeuralNet
 from rts.keras.RTSNNet import RTSNNet
 from rts.src.config import VERBOSE_MODEL_FIT
 from rts.src.config_class import CONFIG
@@ -28,8 +28,8 @@ class NNetWrapper(NeuralNet):
         encoder = encoder or CONFIG.nnet_args.encoder
 
         self.nnet = RTSNNet(game, encoder)
-        self.board_x, self.board_y, num_encoders = game.getBoardSize()
-        self.action_size = game.getActionSize()
+        self.board_x, self.board_y, num_encoders = game.get_board_size()
+        self.action_size = game.get_action_size()
 
         self.encoder = encoder
 

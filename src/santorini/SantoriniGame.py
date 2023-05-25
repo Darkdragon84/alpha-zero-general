@@ -2,7 +2,7 @@ from __future__ import print_function
 
 import numpy as np
 
-from Game import Game
+from game import Game
 from santorini.SantoriniLogic import Board
 
 
@@ -30,20 +30,20 @@ class SantoriniGame(Game):
         super().__init__()
         self.n = board_length
 
-    def getInitBoard(self):
+    def get_init_board(self):
         # return initial board (numpy board)
         b = Board(self.n)
         return np.array(b.pieces)
 
-    def getBoardSize(self):
+    def get_board_size(self):
         # (dimension,a,b) tuple
         return (2, self.n, self.n)
 
-    def getActionSize(self):
+    def get_action_size(self):
         # return number of actions
         return 128
 
-    def getNextState(self, board, player, action):
+    def get_next_state(self, board, player, action):
         # if player takes action on board, return next (board,player)
         # action must be a valid move
 
@@ -91,7 +91,7 @@ class SantoriniGame(Game):
             print('action: ', action)
         return (b.pieces, -player)
 
-    def getValidMoves(self, board, player):
+    def get_valid_moves(self, board, player):
         # return a fixed size binary vector
         # _, _, valids = board.get_all_moves
         b = Board(self.n)
@@ -126,10 +126,10 @@ class SantoriniGame(Game):
 
         return [char1_location, char2_location]
 
-    def getGameEnded(self, board, player):
+    def get_game_ended(self, board, player):
         """
         Assumes player is about to move. THIS IS NOT COMPATIBLE with the prior implementation of
-        Arena.py
+        arena.py
         which returned self.game.getGameEnded(board, 1). 
         Input:
             board: current board
@@ -155,7 +155,7 @@ class SantoriniGame(Game):
             return -1
         return 0
 
-    def getCanonicalForm(self, board, player):
+    def get_canonical_form(self, board, player):
         # return state if player==1, else return -state if player==-1
         board = board * np.append(np.ones((1, self.n, self.n), dtype='int') * player,
                                   np.ones((1, self.n, self.n), dtype='int'), axis=0)
@@ -178,7 +178,7 @@ class SantoriniGame(Game):
 
         return np.array([newB0, newB1])
 
-    def getSymmetries(self, board, pi):
+    def get_symmetries(self, board, pi):
         # mirror, rotational
 
         assert (len(pi) == 128)  # each player has two pieces which can move in
@@ -268,7 +268,7 @@ class SantoriniGame(Game):
 
         return pi_new
 
-    def stringRepresentation(self, board):
+    def string_representation(self, board):
         return board.tostring()
 
     def stringRepresentationReadable(self, board):

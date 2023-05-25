@@ -6,7 +6,7 @@ Neural network architecture was copy-pasted from the game of Othello, so could l
 To train a model for Connect4, update the imports in ```main.py``` to:
 
 ```python
-from Coach import Coach
+from coach import Coach
 from connect4.Connect4Game import Connect4Game
 from connect4 import NNetWrapper as nn
 from utils import dotdict

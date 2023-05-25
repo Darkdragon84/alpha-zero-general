@@ -7,8 +7,8 @@ from tensorflow.python.keras.optimizer_v2.adam import Adam
 class OthelloNNet():
     def __init__(self, game, args):
         # game params
-        self.board_x, self.board_y = game.getBoardSize()
-        self.action_size = game.getActionSize()
+        self.board_x, self.board_y = game.get_board_size()
+        self.action_size = game.get_action_size()
         self.args = args
 
         # Neural Net
