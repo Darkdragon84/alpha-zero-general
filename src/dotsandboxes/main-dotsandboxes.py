@@ -2,7 +2,7 @@ import logging
 
 import coloredlogs
 
-from Coach import Coach
+from coach import Coach
 from utils import dotdict
 from dotsandboxes.keras.NNet import NNetWrapper as nn
 

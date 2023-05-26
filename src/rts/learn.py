@@ -5,7 +5,7 @@ Teaches neural network playing of specified game configuration using self play
 This configuration needs to be kept seperate, as different nnet and game configs are set
 """
 
-from Coach import Coach
+from coach import Coach
 from rts.RTSGame import RTSGame as Game
 from rts.keras.NNet import NNetWrapper as nn
 from rts.src.config_class import CONFIG
@@ -27,5 +27,5 @@ if __name__ == "__main__":
     c = Coach(g, nnet, CONFIG.learn_args)
     if CONFIG.learn_args.load_model:
         print("Load trainExamples from file")
-        c.loadTrainExamples()
+        c.load_train_examples()
     c.learn()

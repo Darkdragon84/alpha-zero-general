@@ -3,7 +3,7 @@ rts/pit.py
 
 Compares 2 players against each other and outputs num wins p1/ num wins p2/ draws
 """
-import Arena
+import arena
 from rts.RTSGame import display, RTSGame
 from rts.src.config_class import CONFIG
 

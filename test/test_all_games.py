@@ -23,8 +23,8 @@
 
 import numpy as np
 
-import Arena
-from MCTS import MCTS
+from arena import Arena
+from mcts import MCTS
 # from connect4.Connect4Game import Connect4Game
 # from connect4.keras.NNet import NNetWrapper as Connect4KerasNNet
 from dotsandboxes.DotsAndBoxesGame import DotsAndBoxesGame
@@ -54,7 +54,7 @@ def execute_game_test(game, neural_net):
     def n1p(x):
         return np.argmax(mcts.getActionProb(x, temp=0))
 
-    arena = Arena.Arena(n1p, rp, game)
+    arena = Arena(n1p, rp, game)
     print(arena.playGames(2, verbose=False))
 
 
